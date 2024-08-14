@@ -30,7 +30,6 @@ export function SearchInput() {
 
   function handleSubmitInput(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(searchVal);
     handlePerformSearch(searchVal);
   }
 

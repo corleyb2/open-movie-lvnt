@@ -9,10 +9,13 @@ export interface OpenMovieResult {
 export type ResourceType = "movie" | "series" | "episode"
 
 
-export interface OpenMovieSearchResponse {
+export interface BaseOpenMovieSearchResponse {
+  Response: boolean  // true in this case
+}
+
+export interface OpenMovieSearchResponse extends BaseOpenMovieSearchResponse {
   Search: Array<OpenMovieResult>
   totalResults: number
-  Response: boolean  // true in this case
 }
 
 /**
@@ -22,7 +25,7 @@ export interface OpenMovieSearchResponse {
  *  "Error": "Movie not found!"
  * }
  */
-export interface OpenMovieSearchError {
+export interface OpenMovieSearchError extends BaseOpenMovieSearchResponse {
   Error: string
-  Response: boolean  // false in this case
 }
+
