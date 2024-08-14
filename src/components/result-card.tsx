@@ -9,6 +9,7 @@ import {
   Image,
   Text,
 } from "@mantine/core";
+import Link from "next/link";
 import { useMemo } from "react";
 
 interface ResultCardProps {
@@ -16,7 +17,7 @@ interface ResultCardProps {
 }
 
 export function ResultCard({ cardData }: ResultCardProps) {
-  const { Poster, Title, Type, Year } = cardData;
+  const {  Title, Type, Year, imdbID } = cardData;
 
   const colorForType = useMemo(() => {
     if (Type === "episode" ){
@@ -53,7 +54,7 @@ export function ResultCard({ cardData }: ResultCardProps) {
           {Title} ({Year})
         </Text>
       </Group>
-      <Button>Go to Movie</Button>
+      <Button component={Link}href={`/movies/${imdbID}`}>Go to Movie</Button>
     </Card>
   );
 }
