@@ -17,8 +17,6 @@ export default async function Home({ searchParams }: PageSearchParams) {
     totalPages,
   } = await listMovies({ ...searchParams });
 
-  console.log({ searchParams, total, totalPages });
-
   return (
     <>
       <SearchInput />
