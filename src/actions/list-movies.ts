@@ -1,9 +1,16 @@
 "use server";
 
 import { PageSearchParams } from "@/app/page";
-import { BaseOpenMovieSearchResponse, OpenMovieSearchError, OpenMovieSearchResponse } from "@/types";
+import { BaseOpenMovieSearchResponse, OpenMovieSearchError, OpenMovieSearchResponse, ResourceType } from "@/types";
 
-export async function listMovies({page, query}: PageSearchParams["searchParams"]) {
+type ListMoviesActionParams  = PageSearchParams["searchParams"] 
+// & {
+//   filters?: {
+//     type: ResourceType
+//   }
+// }
+
+export async function listMovies({page, query}: ListMoviesActionParams) {
   const baseUrl = process.env.OMDB_BASE_URL ?? "";
   const apiKey = process.env.OMDB_API_KEY ?? "";
 
