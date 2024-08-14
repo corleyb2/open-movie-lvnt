@@ -8,7 +8,7 @@ interface ResultCardProps {
 export function ResultCard({ cardData }: ResultCardProps) {
   const {Poster, Title, Type, Year} = cardData
   return (
-    <Card shadow="sm" padding="lg" radius="md" withBorder style={{flexDirection: "row", justifyContent: "space-between"}}>
+    <Card shadow="sm" padding="sm" radius="md" withBorder style={{flexDirection: "row", justifyContent: "space-between"}}>
         {/* <Image
           src={cardData.Poster}
           height={120}
