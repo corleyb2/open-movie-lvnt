@@ -4,6 +4,7 @@ import { Button, CloseButton, Group, Input } from "@mantine/core";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 
+
 export function SearchInput() {
   const [searchVal, setSearchVal] = useState<string>("");
 
@@ -17,7 +18,13 @@ export function SearchInput() {
    */
   function handlePerformSearch(searchTerm: string) {
     const newParams = new URLSearchParams(searchParams.toString());
-    newParams.set("query", searchTerm);
+    // Handle clear out search term AND input of actual search term
+    if (!!searchTerm){
+      newParams.set("query", searchTerm);
+    } else {
+      newParams.delete("query")
+    }
+    newParams.delete("page")
     router.replace(pathName + "?" + newParams.toString());
   }
 
@@ -39,7 +46,6 @@ export function SearchInput() {
           onChange={(e) => setSearchVal(e.currentTarget.value)}
           name="search"
           placeholder="Search"
-          // leftSection={}  //TODO: search icon?
           rightSectionPointerEvents="all"
           rightSection={
             <CloseButton
@@ -49,7 +55,7 @@ export function SearchInput() {
             />
           }
         />
-        <Button type="submit">Submit Search</Button>
+        <Button disabled={!searchVal || searchVal.length < 3} type="submit">Submit Search</Button>
       </Group>
     </form>
   );

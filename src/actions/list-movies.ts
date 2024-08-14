@@ -28,13 +28,11 @@ export async function listMovies({page, query}: PageSearchParams["searchParams"]
     },
   }).then(async (res) => await res.json() as OpenMovieSearchResponse)
 
-  console.log(results)
-
   const pageSize = 10 // not confirmed by OMDb but all attempted results show a max of 10 per page.
   
   return {
     data: results.Search,
     total: results.totalResults,
-    totalPages: Math.ceil(results.totalResults / pageSize)
+    totalPages: Math.ceil(results.totalResults / pageSize),
   }
 }
