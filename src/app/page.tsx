@@ -35,8 +35,8 @@ export default async function Home({ searchParams }: PageSearchParams) {
   return (
     <Container>
       <Stack>
-        <Text>Welcome to MoviNiti!</Text>
-        <Text>Please search for a movie below</Text>
+        <Text size="xl" fw={600}>Welcome to MoviNiti!</Text>
+        <Text size="md">Please search for a movie below</Text>
         <SimpleGrid>
           <SearchInput />
         </SimpleGrid>
