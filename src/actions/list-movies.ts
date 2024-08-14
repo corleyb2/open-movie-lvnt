@@ -19,8 +19,6 @@ export async function listMovies({page, query}: PageSearchParams["searchParams"]
     urlParams.append("page", String(page))
   }
 
-  console.log("Here", `${baseUrl}/?` + urlParams.toString());
-
   const results = await fetch(`${baseUrl}/?` + urlParams.toString(), {
     method: "GET",
     headers: {
