@@ -1,3 +1,4 @@
+import { OpenMovieDetails } from "@/types"
 
 async function getMovieById(imdbId: string){
 
@@ -24,7 +25,7 @@ async function getMovieById(imdbId: string){
 
   const json = await response.json()
 
-  return json
+  return json as OpenMovieDetails
 }
 
 export default getMovieById
