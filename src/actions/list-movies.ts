@@ -1,8 +1,9 @@
 "use server";
 
+import { PageSearchParams } from "@/app/page";
 import { OpenMovieSearchResponse } from "@/types";
 
-export async function listMovies() {
+export async function listMovies({page, query}: PageSearchParams["searchParams"]) {
   const baseUrl = process.env.OMDB_BASE_URL ?? "";
   const apiKey = process.env.OMDB_API_KEY ?? "";
 
@@ -10,8 +11,13 @@ export async function listMovies() {
     apiKey,
   });
 
-  const testQuery = "Titanic"
-  urlParams.append("s", String(testQuery).toLowerCase());
+
+  if (query){
+    urlParams.append("s", String(query).toLowerCase());
+  }
+  if (page){
+    urlParams.append("page", String(page))
+  }
 
   console.log("Here", `${baseUrl}/?` + urlParams.toString());
 
@@ -22,10 +28,13 @@ export async function listMovies() {
     },
   }).then(async (res) => await res.json() as OpenMovieSearchResponse)
 
+  console.log(results)
+
   const pageSize = 10 // not confirmed by OMDb but all attempted results show a max of 10 per page.
+  
   return {
     data: results.Search,
-    total: results.totalCount,
-    totalPages: (results.totalCount / pageSize)
+    total: results.totalResults,
+    totalPages: Math.ceil(results.totalResults / pageSize)
   }
 }

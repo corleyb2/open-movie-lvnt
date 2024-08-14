@@ -11,7 +11,7 @@ export type ResourceType = "movie" | "series" | "episode"
 
 export interface OpenMovieSearchResponse {
   Search: Array<OpenMovieResult>
-  totalCount: number
+  totalResults: number
   Response: boolean  // true in this case
 }
 

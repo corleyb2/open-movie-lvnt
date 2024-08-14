@@ -3,9 +3,21 @@
 import { listMovies } from "@/actions/list-movies";
 import { SearchInput } from "@/components/search-input";
 
-export default async function Home() {
-  const { data: movieList, total } = await listMovies();
+export type PageSearchParams = {
+  searchParams: {
+    query?: string;
+    page?: string;
+  };
+};
 
+export default async function Home({ searchParams }: PageSearchParams) {
+  const {
+    data: movieList,
+    total,
+    totalPages,
+  } = await listMovies({ ...searchParams });
+
+  console.log({ searchParams, total, totalPages });
 
   return (
     <>
@@ -18,13 +30,19 @@ export default async function Home() {
           flexDirection: "column",
         }}
       >
-        {movieList.map((r) => {
-          return (
-            <div key={r.imdbID} style={{ display: "flex" }}>
-              {r.Title}
-            </div>
-          );
-        })}
+        {searchParams.query && total > 0 && (
+          <div>
+            {`Search results for '${searchParams.query.toString()}' - ${total} found`}
+            {movieList.map((r) => {
+              return (
+                <div key={r.imdbID} style={{ display: "flex" }}>
+                  {r.Title}
+                </div>
+              );
+            })}
+          </div>
+        )}
+        <div>total pages: {totalPages}</div>
       </div>
     </>
   );
