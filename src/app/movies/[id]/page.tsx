@@ -1,9 +1,12 @@
 import { Container } from "@mantine/core";
 import React from "react";
+import getMovieById from "../../../actions/get-movie-by-id";
 
-function MoviePage({ params }: { params: { id: string } }){
+async function MoviePage({ params }: { params: { id: string } }){
+
+  const movieDetails = await getMovieById(params.id)
   
-  return (<Container>Params: {params.id}</Container>)
+  return (<Container>{JSON.stringify(movieDetails)}</Container>)
 }
 
 export default MoviePage
