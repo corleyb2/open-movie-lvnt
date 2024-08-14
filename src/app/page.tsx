@@ -2,14 +2,10 @@
 
 import { listMovies } from "@/actions/list-movies";
 import { Pagination } from "@/components/pagination";
-import { ResultCard } from "@/components/result-card";
 import { Results } from "@/components/results";
 import { SearchInput } from "@/components/search-input";
 import {
-  Button,
   Container,
-  Flex,
-  Group,
   SimpleGrid,
   Stack,
   Text,

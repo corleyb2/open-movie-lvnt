@@ -50,9 +50,8 @@ export function ResultCard({ cardData }: ResultCardProps) {
        </Flex>
       <Group justify="space-between" mt="md" mb="xs">
         <Text fw={500}>
-          {Title} - ({Year})
+          {Title} ({Year})
         </Text>
-       
       </Group>
       <Button>Go to Movie</Button>
     </Card>
