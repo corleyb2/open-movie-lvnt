@@ -1,6 +1,8 @@
 "use server";
 
 import { listMovies } from "@/actions/list-movies";
+import { ResultCard } from "@/components/result-card";
+import { Results } from "@/components/results";
 import { SearchInput } from "@/components/search-input";
 
 export type PageSearchParams = {
@@ -20,28 +22,12 @@ export default async function Home({ searchParams }: PageSearchParams) {
   return (
     <>
       <SearchInput />
-      <div
-        id="list-results"
-        style={{
-          border: "1px solid red",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
         {searchParams.query && total > 0 && (
           <div>
-            {`Search results for '${searchParams.query.toString()}' - ${total} found`}
-            {movieList.map((r) => {
-              return (
-                <div key={r.imdbID} style={{ display: "flex" }}>
-                  {r.Title}
-                </div>
-              );
-            })}
+          <Results results={movieList}/>
+          <div>Current Page: </div>
           </div>
         )}
-        <div>total pages: {totalPages}</div>
-      </div>
     </>
   );
 }
